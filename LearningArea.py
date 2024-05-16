@@ -1,42 +1,100 @@
 import tkinter as tk
+import PIL
+from PIL import Image, ImageTk
 
-def show_page_two():
-    page_one.forget()
-    page_two.lift()
+class MainApplication(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self._frame = None
+        self.switch_frame(LearnPage)
 
-root = tk.Tk()
-root.geometry("400x600")
-root.configure(bg="#FFE5E5", relief="solid", highlightcolor="#FF5252", highlightthickness=5)  # Add a border and set its color and thickness
-root.resizable(False,False) #make the window non resizable
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        if self._frame is not None:
+            self._frame.destroy()
+        self._frame = new_frame
+        self._frame.pack()
 
-# Create a title label
-title_label = tk.Label(root, text="Area!", font=("Helvetica Neue", 32, "bold"), fg="#FF5252", bg="#FFB9B9")
+class Page(tk.Frame):
+    def __init__(self, *args, **kwargs):
+        tk.Frame.__init__(self, *args, **kwargs)
 
-# Add the title label to the window and position it 
-title_label.pack(pady=(50, 50))
+class LearnPage(Page):
+    def __init__(self, *args, **kwargs):
+        Page.__init__(self, *args, **kwargs)
+        self.master.geometry("400x600")  # Set the window size to 400x600
+        label = tk.Label(self, text="This is the Learn page")
+        label.pack()
+        button = tk.Button(self, text="Go to Quiz page", command=lambda: app.switch_frame(QuizPage))
+        button.pack()
 
-# Create frames for the pages
-page_one = tk.Frame(root, bg="#FFD1D1")
-page_two = tk.Frame(root, bg="#FFD1D1")
+        # Load an image using PIL
+        image = Image.open("/Users/nevaaa/Desktop/Software Engineering/SoftwareAssessmentTask/trianglefacee.jpg")
+        photo = ImageTk.PhotoImage(image)
+        image_label = tk.Label(self, image=photo)
+        image_label.image = photo  # Keep a reference to prevent garbage collection
+        image_label.pack()
 
+class QuizPage(Page):
+    def __init__(self, *args, **kwargs):
+        Page.__init__(self, *args, **kwargs)
+        label = tk.Label(self, text="This is the Quiz page")
+        label.pack()
+        button = tk.Button(self, text="Go to Area Calculator page", command=lambda: app.switch_frame(AreaCalculatorPage))
+        button.pack()
 
-# Create three buttons in the first frame
-btn_rectangle = tk.Button(page_one, text="Learn", font=("Helvetica Neue", 18, "bold"), bg="#FF5252", fg="white", bd=0, command=show_page_two)
-btn_square = tk.Button(page_one, text="Quiz", font=("Helvetica Neue", 18, "bold"), bg="#FF5252", fg="white", bd=0)
-btn_triangle = tk.Button(page_one, text="Area Calculator", font=("Helvetica Neue", 18, "bold"), bg="#FF5252", fg="white", bd=0)
+class AreaCalculatorPage(Page):
+    def __init__(self, *args, **kwargs):
+        Page.__init__(self, *args, **kwargs)
 
-# Add the buttons to the first frame and position them in the center
-btn_rectangle.pack(pady=(0, 20))
-btn_square.pack(pady=(0, 20))
-btn_triangle.pack(pady=(0, 20))
+        self.shape_var = tk.IntVar()
+        self.shape_var.set(1)
 
-# Add a label to the second frame
-page_two_label = tk.Label(page_two, text="Page Two", font=("Helvetica Neue", 24, "bold"), fg="#FF5252", bg="#FFD1D1")
+        tk.Label(self, text="Select the shape:").pack()
+        tk.Radiobutton(self, text="Rectangle", variable=self.shape_var, value=1).pack()
+        tk.Radiobutton(self, text="Square", variable=self.shape_var, value=2).pack()
+        tk.Radiobutton(self, text="Triangle", variable=self.shape_var, value=3).pack()
 
-# Add the label to the second frame and position it in the center
-page_two_label.pack(pady=(100, 100))
+        self.side1_var = tk.StringVar()
+        self.side2_var = tk.StringVar()
+        self.side3_var = tk.StringVar()
 
-# Add the frames to the window
-page_one.pack(fill="both", expand=True)
+        tk.Label(self, text="Side 1:").pack()
+        tk.Entry(self, textvariable=self.side1_var).pack()
+        tk.Label(self, text="Side 2:").pack()
+        tk.Entry(self, textvariable=self.side2_var).pack()
+        tk.Label(self, text="Side 3:").pack()
+        tk.Entry(self, textvariable=self.side3_var).pack()
 
-root.mainloop()
+        tk.Button(self, text="Calculate Area", command=self.calculate_area).pack()
+
+    def calculate_area(self):
+        if self.shape_var.get() == 1:
+            # Rectangle
+            side1 = float(self.side1_var.get())
+            side2 = float(self.side2_var.get())
+            area = side1 * side2
+        elif self.shape_var.get() == 2:
+            # Square
+            side = float(self.side1_var.get())
+            area = side * side
+        else:
+            # Triangle
+            side1 = float(self.side1_var.get())
+            side2 = float(self.side2_var.get())
+            area = (side1 + side2) / 2
+
+        # Switch tothe results page
+        ResultsPage(self.master, area=area)
+        self.master.switch_frame(ResultsPage)
+
+class ResultsPage(Page):
+    def __init__(self, *args, **kwargs):
+        Page.__init__(self, *args, **kwargs)
+        area = kwargs.pop("area")
+        tk.Label(self, text=f"The area is: {area}").pack()
+        tk.Button(self, text="Back to Area Calculator", command=lambda: app.switch_frame(AreaCalculatorPage)).pack()
+
+if __name__ == "__main__":
+    app = MainApplication()
+    app.mainloop()
