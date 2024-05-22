@@ -1,18 +1,18 @@
 import tkinter as tk
 
-class QuizPage(tk.Frame):
-    def __init__(self, master):
-        super().__init__(master, bg="#faf0be")
-        self.master = master
-        self.create_widgets()
+class Page3:
+    def __init__(self):
+        # create a new root window for page 2
+        self.root = tk.Tk()
+        self.root.title("Quiz Page")
+        self.root.geometry("500x700")
+        self.root.configure(bg="#faf0be")
+        
 
-    def create_widgets(self):
-        self.title_label = tk.Label(self, text="Quiz", font=("Helvetica", 24, "bold"), bg="#faf0be", pady=20)
-        self.title_label.pack()
+        # add widgets to page 2 here
+        label = tk.Label(self.root, text="Quiz!")
+        label.pack()
 
-        # Add widgets for the Quiz page here
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    QuizPage(root).pack(side="top", fill="both", expand=True)
-    root.mainloop()
+    def run(self):
+        # start the Tkinter event loop
+        self.root.mainloop()
