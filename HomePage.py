@@ -19,9 +19,10 @@ def navigate_to_quizpage():
 
 
 def navigate_to_areacalculatorpage():
-    # destroy the current page
     root.destroy()
-
+    quiz_root = tk.Tk()
+    quiz_page = AreaCalculatorPage.Page4(quiz_root)
+    quiz_root.mainloop()
     # create a new instance of page 4
     page4_instance = AreaCalculatorPage.Page4()
 

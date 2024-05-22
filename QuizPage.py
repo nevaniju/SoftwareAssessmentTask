@@ -11,23 +11,23 @@ class Page3:
         # Initialize quiz score and question number
         self.quiz_score = 0
         self.question_number = 0
-        
-        # List of questions, each with text, options, and the correct answer
+
+        # List of questions, each with text, options, and the correct answer index
         self.questions = [
             {"text": "Question 1: What is the area of a rectangle with a length of 3 and a width of 4?",
-             "options": ["12", "13", "14", "15"], "answer": "12"},
+             "options": ["12", "13", "14", "15"], "answer_index": 0},
             {"text": "Question 2: What is the area of a triangle with a length of 6 and a width of 9?",
-             "options": ["45", "54", "27", "72"], "answer": "27"},
+             "options": ["45", "54", "27", "72"], "answer_index": 2},
             {"text": "Question 3: What is the area of a rectangle with a length of 6 and a width of 2?",
-             "options": ["12", "13", "14", "15"], "answer": "12"},
+             "options": ["12", "13", "14", "15"], "answer_index": 0},
             {"text": "Question 4: What is the area of a square with a length of 20?",
-             "options": ["123", "40", "20", "400"], "answer": "400"},
+             "options": ["123", "40", "20", "400"], "answer_index": 3},
             {"text": "Question 5: What is the area of a triangle with a length of 10 and a width of 10?",
-             "options": ["12", "50", "14", "15"], "answer": "50"},
+             "options": ["12", "50", "14", "15"], "answer_index": 1},
             {"text": "Question 6: What is the area of a square with a length of 7?",
-             "options": ["49", "94", "14", "0"], "answer": "49"},
+             "options": ["49", "94", "14", "0"], "answer_index": 0},
             {"text": "Question 7: Challenge Question 10: What is the area of the following shape?",
-             "options": None, "answer": "605"}  # User will input the answer directly
+             "options": None, "answer_index": None}  # User will input the answer directly
         ]
         
         # Display the first question
@@ -45,18 +45,19 @@ class Page3:
             question_label = tk.Label(self.root, text=question["text"], wraplength=450, bg="#FFE2CF", font=("Helvetica", 16, "bold"))
             question_label.pack(pady=20)
             
-            # If there are options, display them as radio buttons
+            # Display options as radio buttons (if applicable)
             if question["options"]:
-                self.option_var = tk.StringVar()
+                self.option_var = tk.IntVar()  # Change StringVar to IntVar to store the index
                 options_frame = tk.Frame(self.root, bg="#FFE2CF")
                 options_frame.pack(pady=20)
 
-                for option in question["options"]:
-                    option_button = tk.Radiobutton(options_frame, text=option, variable=self.option_var, value=option, 
+                # Use enumerate to get both index and option
+                for index, option in enumerate(question["options"]):
+                    option_button = tk.Radiobutton(options_frame, text=option, variable=self.option_var, value=index, 
                                                    bg="#FFE2CF", font=("Helvetica", 14), anchor='w', width=20, 
                                                    indicatoron=0, padx=10, pady=10, selectcolor="#FFD7AF")
                     option_button.pack(anchor='center', pady=5)
-                    
+
                 submit_button = tk.Button(self.root, text="Submit", command=self.check_answer, bg="#FF9A76", font=("Helvetica", 14, "bold"))
                 submit_button.pack(pady=20)
             else:
@@ -79,17 +80,25 @@ class Page3:
         
         # Retrieve the user's answer
         if question["options"]:
-            user_selection = self.option_var.get()
+            user_selection = self.option_var.get()  # Get the index of the selected option
         else:
             user_selection = self.answer_entry.get()
 
         # Check if the user's answer is correct
-        if user_selection == question["answer"]:
-            feedback = "You are correct!"
-            self.quiz_score += 1
+        if question["options"]:
+            correct_answer_index = question["answer_index"]
+            if user_selection == correct_answer_index:
+                feedback = "You are correct!"
+                self.quiz_score += 1
+            else:
+                feedback = f"You are incorrect, the correct answer is {question['options'][correct_answer_index]}"
         else:
-            feedback = f"You are incorrect, the correct answer is {question['answer']}"
-        
+            if user_selection == str(question["answer_index"]):  # Convert to string for direct comparison
+                feedback = "You are correct!"
+                self.quiz_score += 1
+            else:
+                feedback = f"You are incorrect, the correct answer is {question['answer_index']}"
+    
         # Clear window and display feedback
         self.clear_window()
         feedback_label = tk.Label(self.root, text=feedback, wraplength=450, bg="#FFE2CF", font=("Helvetica", 16, "bold"))
