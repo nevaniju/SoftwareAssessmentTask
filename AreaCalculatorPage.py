@@ -17,7 +17,13 @@ class Page4:
         self.square_radio = tk.Radiobutton(self.shape_frame, text="Square", variable=self.shape_var, value="square", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
         self.triangle_radio = tk.Radiobutton(self.shape_frame, text="Triangle", variable=self.shape_var, value="triangle", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
         
- 
+        self.rectangle_radio.grid(row=0, column=0, padx=10)
+        self.square_radio.grid(row=0, column=1, padx=10)
+        self.triangle_radio.grid(row=0, column=2, padx=10)
+        
+        # Input fields
+        self.form_frame = tk.Frame(self.root, bg="#FFE2CF")
+        self.form_frame.pack(pady=20)
         
         self.length_label = tk.Label(self.form_frame, text="Length:", font=("Helvetica", 14), bg="#FFE2CF")
         self.length_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
@@ -34,9 +40,36 @@ class Page4:
         self.height_label = tk.Label(self.form_frame, text="Height:", font=("Helvetica", 14), bg="#FFE2CF")
         self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
         
-
+        self.calculate_button = tk.Button(self.root, text="Calculate Area", command=self.calculate_area, font=("Helvetica", 14), bg="#FF9A76")
+        self.calculate_button.pack(pady=20)
         
+        self.result_label = tk.Label(self.root, text="", font=("Helvetica", 18), bg="#FFE2CF")
+        self.result_label.pack(pady=20)
+        
+        # Initialize the form with the default shape
+        self.update_form()
 
+    def update_form(self):
+        # Clear the current form
+        for widget in self.form_frame.winfo_children():
+            widget.grid_forget()
+        
+        # Display the appropriate input fields based on the selected shape
+        shape = self.shape_var.get()
+        if shape == "rectangle":
+            self.length_label.grid(row=0, column=0, pady=5)
+            self.length_entry.grid(row=0, column=1, pady=5)
+            self.width_label.grid(row=1, column=0, pady=5)
+            self.width_entry.grid(row=1, column=1, pady=5)
+        elif shape == "square":
+            self.side_label.grid(row=0, column=0, pady=5)
+            self.side_entry.grid(row=0, column=1, pady=5)
+        elif shape == "triangle":
+            self.base_label.grid(row=0, column=0, pady=5)
+            self.base_entry.grid(row=0, column=1, pady=5)
+            self.height_label.grid(row=1, column=0, pady=5)
+            self.height_entry.grid(row=1, column=1, pady=5)
+        
     def calculate_area(self):
         shape = self.shape_var.get()
         try:
