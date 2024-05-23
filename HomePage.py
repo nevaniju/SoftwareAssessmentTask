@@ -12,17 +12,19 @@ def navigate_to_learnpage():
     page2_instance = LearnPage.Page2()
 
 def navigate_to_quizpage():
-    root.destroy()
+    # destroy the current page
+    root.destroy() 
     quiz_root = tk.Tk()
     quiz_page = QuizPage.Page3(quiz_root)
     quiz_root.mainloop()
 
+    # create a new instance of page 3
+    page3_instance = QuizPage.Page3()
 
 def navigate_to_areacalculatorpage():
+    # destroy the current page
     root.destroy()
-    quiz_root = tk.Tk()
-    quiz_page = AreaCalculatorPage.Page4(quiz_root)
-    quiz_root.mainloop()
+
     # create a new instance of page 4
     page4_instance = AreaCalculatorPage.Page4()
 
