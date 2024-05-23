@@ -1,5 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import customtkinter as ctk
+
 
 class Page2:
     def __init__(self):
@@ -7,11 +9,16 @@ class Page2:
         self.root = tk.Tk()
         self.root.title("Learn Page")
         self.root.geometry("500x700")
-        self.root.configure(bg="#faf0be")
+        self.root.configure(bg="#FFA500")
+
+        # Create a frame
+        border_frame = tk.Frame(self.root, bg="#FFE2CF", bd=10)
+        border_frame.place(relx=0.5, rely=0.5, anchor="center", width=480, height=680)
+
 
         # create a title label
-        title_label = tk.Label(self.root, text="Learn!", font=("Helvetica", 36, "bold"), fg="red", bg="#faf0be")
-        title_label.pack(pady=(50, 20))
+        title_label = tk.Label(self.root, text="Learn!", font=("Helvetica", 42, "bold"), fg="#D2691E", bg="#FFE2CF")
+        title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
 
         # create a label for the rectangle section
         rectangle_label = tk.Label(self.root, text="Rectangle", font=("Helvetica", 24, "bold"), bg="#faf0be")
