@@ -1,22 +1,25 @@
 import tkinter as tk
 
-
 class Page4:
    def __init__(self):
        # create a new root window for page 4
        self.root = tk.Tk()
        self.root.title("Area Calculator")
        self.root.geometry("500x700")
-       self.root.configure(bg="#FFE2CF")
+       self.root.configure(bg="#FFE2CF", highlightbackground="#FFA500", highlightthickness=10)
+      
+       # Create a title label
+       title_label = tk.Label(self.root, text="Area!", font=("Helvetica", 50, "bold"), fg="#D2691E", bg="#FFE2CF")
+       title_label.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
       
        # Shape selection
        self.shape_var = tk.StringVar(value="rectangle")
        self.shape_frame = tk.Frame(self.root, bg="#FFE2CF")
-       self.shape_frame.pack(pady=20)
-      
-       self.rectangle_radio = tk.Radiobutton(self.shape_frame, text="Rectangle", variable=self.shape_var, value="rectangle", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
-       self.square_radio = tk.Radiobutton(self.shape_frame, text="Square", variable=self.shape_var, value="square", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
-       self.triangle_radio = tk.Radiobutton(self.shape_frame, text="Triangle", variable=self.shape_var, value="triangle", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
+       self.shape_frame.pack(pady=(100, 20))
+       
+       self.rectangle_radio = tk.Radiobutton(self.shape_frame, text="Rectangle", variable=self.shape_var, value="rectangle", command=self.update_form, font=("Helvetica", 18), bg="#FFE2CF", selectcolor="#FFA500", indicatoron=0, width=10)
+       self.square_radio = tk.Radiobutton(self.shape_frame, text="Square", variable=self.shape_var, value="square", command=self.update_form, font=("Helvetica", 18), bg="#FFE2CF", selectcolor="#8B4513", indicatoron=0, width=10)
+       self.triangle_radio = tk.Radiobutton(self.shape_frame, text="Triangle", variable=self.shape_var, value="triangle", command=self.update_form, font=("Helvetica", 18), bg="#FFE2CF", selectcolor="#A0522D", indicatoron=0, width=10)
       
        self.rectangle_radio.grid(row=0, column=1, padx=10)
        self.square_radio.grid(row=1, column=1, padx=10)
@@ -26,30 +29,35 @@ class Page4:
        self.form_frame = tk.Frame(self.root, bg="#FFE2CF")
        self.form_frame.pack(pady=20)
       
-       self.length_label = tk.Label(self.form_frame, text="Length:", font=("Helvetica", 14), bg="#FFE2CF")
-       self.length_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
+       self.length_label = tk.Label(self.form_frame, text="Length:", font=("Helvetica", 18), bg="#FFE2CF")
+       self.length_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10)
       
-       self.width_label = tk.Label(self.form_frame, text="Width:", font=("Helvetica", 14), bg="#FFE2CF")
-       self.width_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
+       self.width_label = tk.Label(self.form_frame, text="Width:", font=("Helvetica", 18), bg="#FFE2CF")
+       self.width_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10)
       
-       self.side_label = tk.Label(self.form_frame, text="Side Length:", font=("Helvetica", 14), bg="#FFE2CF")
-       self.side_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
+       self.side_label = tk.Label(self.form_frame, text="Side Length:", font=("Helvetica", 18), bg="#FFE2CF")
+       self.side_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10)
       
-       self.base_label = tk.Label(self.form_frame, text="Base:", font=("Helvetica", 14), bg="#FFE2CF")
-       self.base_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
+       self.base_label = tk.Label(self.form_frame, text="Base:", font=("Helvetica", 18), bg="#FFE2CF")
+       self.base_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10)
       
-       self.height_label = tk.Label(self.form_frame, text="Height:", font=("Helvetica", 14), bg="#FFE2CF")
-       self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 14))
+       self.height_label = tk.Label(self.form_frame, text="Height:", font=("Helvetica", 18), bg="#FFE2CF")
+       self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10)
       
-       self.calculate_button = tk.Button(self.root, text="Calculate Area", command=self.calculate_area, font=("Helvetica", 14), bg="#FF9A76")
+       self.calculate_button = tk.Button(self.root, text="Calculate Area", command=self.calculate_area, font=("Helvetica", 18), bg="#FF9A76", width=15)
        self.calculate_button.pack(pady=20)
       
-       self.result_label = tk.Label(self.root, text="", font=("Helvetica", 18), bg="#FFE2CF")
+       self.result_label = tk.Label(self.root, text="", font=("Helvetica", 22), bg="#FFE2CF")
        self.result_label.pack(pady=20)
+       
+       self.home_button = tk.Button(self.root, text="Home Page", font=("Helvetica", 18), bg="#FFE2CF", width=10)
+       self.home_button.pack(side=tk.LEFT, padx=50, pady=10)
+       
+       self.clear_button = tk.Button(self.root, text="Clear", command=self.clear_fields, font=("Helvetica", 18), bg="#FFE2CF", width=10)
+       self.clear_button.pack(side=tk.RIGHT, padx=50, pady=10)
       
        # Initialize the form with the default shape
        self.update_form()
-
 
    def update_form(self):
        # Clear the current form
@@ -59,18 +67,18 @@ class Page4:
        # Display the appropriate input fields based on the selected shape
        shape = self.shape_var.get()
        if shape == "rectangle":
-           self.length_label.grid(row=0, column=0, pady=5)
-           self.length_entry.grid(row=0, column=1, pady=5)
-           self.width_label.grid(row=1, column=0, pady=5)
-           self.width_entry.grid(row=1, column=1, pady=5)
+           self.length_label.grid(row=0, column=0, pady=5, padx=5)
+           self.length_entry.grid(row=0, column=1, pady=5, padx=5)
+           self.width_label.grid(row=1, column=0, pady=5, padx=5)
+           self.width_entry.grid(row=1, column=1, pady=5, padx=5)
        elif shape == "square":
-           self.side_label.grid(row=0, column=0, pady=5)
-           self.side_entry.grid(row=0, column=1, pady=5)
+           self.side_label.grid(row=0, column=0, pady=5, padx=5)
+           self.side_entry.grid(row=0, column=1, pady=5, padx=5)
        elif shape == "triangle":
-           self.base_label.grid(row=0, column=0, pady=5)
-           self.base_entry.grid(row=0, column=1, pady=5)
-           self.height_label.grid(row=1, column=0, pady=5)
-           self.height_entry.grid(row=1, column=1, pady=5)
+           self.base_label.grid(row=0, column=0, pady=5, padx=5)
+           self.base_entry.grid(row=0, column=1, pady=5, padx=5)
+           self.height_label.grid(row=1, column=0, pady=5, padx=5)
+           self.height_entry.grid(row=1, column=1, pady=5, padx=5)
       
    def calculate_area(self):
        shape = self.shape_var.get()
@@ -92,15 +100,16 @@ class Page4:
        except ValueError:
            self.result_label.config(text="Please enter valid numbers")
       
+   def clear_fields(self):
+       for entry in [self.length_entry, self.width_entry, self.side_entry, self.base_entry, self.height_entry]:
+           entry.delete(0, tk.END)
+       self.result_label.config(text="")
+      
    def run(self):
        # start the Tkinter event loop
        self.root.mainloop()
-
 
 # To run the application
 if __name__ == "__main__":
    app = Page4()
    app.run()
-
-
-
