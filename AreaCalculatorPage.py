@@ -18,9 +18,9 @@ class Page4:
        self.square_radio = tk.Radiobutton(self.shape_frame, text="Square", variable=self.shape_var, value="square", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
        self.triangle_radio = tk.Radiobutton(self.shape_frame, text="Triangle", variable=self.shape_var, value="triangle", command=self.update_form, font=("Helvetica", 14), bg="#faf0be")
       
-       self.rectangle_radio.grid(row=0, column=0, padx=10)
-       self.square_radio.grid(row=0, column=1, padx=10)
-       self.triangle_radio.grid(row=0, column=2, padx=10)
+       self.rectangle_radio.grid(row=0, column=1, padx=10)
+       self.square_radio.grid(row=1, column=1, padx=10)
+       self.triangle_radio.grid(row=2, column=1, padx=10)
       
        # Input fields
        self.form_frame = tk.Frame(self.root, bg="#FFE2CF")

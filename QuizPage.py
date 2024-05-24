@@ -6,7 +6,10 @@ class Page3:
         self.root = root
         self.root.title("Quiz!")
         self.root.geometry("500x700")
-        self.root.configure(bg="#FFE2CF")
+        self.root.configure(bg="#FFA500")
+
+        self.border_frame = tk.Frame(self.root, bg="#FFE2CF", bd=10)
+        self.border_frame.place(relx=0.5, rely=0.5, anchor="center", width=480, height=680)
         
         # Initialize quiz score and question number
         self.quiz_score = 0
