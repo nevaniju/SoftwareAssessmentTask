@@ -1,5 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import HomePage
+import QuizPage
 
 class Page2:
     def __init__(self):
@@ -71,14 +73,33 @@ class Page2:
         square_image_label.place(x=300, y=420)
 
         # Add Home Page and Quiz buttons
-        home_button = tk.Button(border_frame, text="Home Page", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", relief="flat")
+        home_button = tk.Button(border_frame, text="Home Page", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", relief="flat", command=self.navigate_to_homepage )
         home_button.place(x=90, y=600, width=150, height=40)
 
-        quiz_button = tk.Button(border_frame, text="Quiz", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", relief="flat")
+        quiz_button = tk.Button(border_frame, text="Quiz", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", relief="flat", command=self.navigate_to_quizpage)
         quiz_button.place(x=260, y=600, width=150, height=40)
 
         # Start the tkinter event loop
         self.root.mainloop()
+
+    def navigate_to_homepage(self):
+        # Close the current Learn Page
+        self.root.destroy()
+
+        # Recreate the Home Page
+        root = tk.Tk()
+        HomePage.Page1(root)
+        root.mainloop()
+
+    def navigate_to_quizpage(self):
+        # destroy the current page
+        self.root.destroy() 
+        quiz_root = tk.Tk()
+        quiz_page = QuizPage.Page3(quiz_root)
+        quiz_root.mainloop()
+
+        # create a new instance of page 3
+        page3_instance = QuizPage.Page3()
 
 # Create an instance of the Page2 class to run the program
 if __name__ == "__main__":
