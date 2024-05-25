@@ -10,10 +10,10 @@ class Page4:
 
       
        # Create a title label
-       title_label = tk.Label(self.root, text="Area!", font=("Helvetica", 50, "bold"), fg="#D2691E", bg="#FFE2CF")
+       title_label = tk.Label(self.root, text="Area Calculator", font=("Helvetica", 40, "bold"), fg="#D2691E", bg="#FFE2CF")
        title_label.pack(pady=(20, 10))
-
-       subheading_label = tk.Label(self.root, text="Please select your shape", font=("Helvetica", 20), fg="#D2691E", bg="#FFE2CF")
+       
+       subheading_label = tk.Label(self.root, text="Please select your shape:", font=("Helvetica", 20), fg="#D2691E", bg="#FFE2CF")
        subheading_label.pack(pady=(0, 20))
       
        # Shape selection
@@ -21,9 +21,9 @@ class Page4:
        self.shape_frame = tk.Frame(self.root, bg="#FFE2CF")
        self.shape_frame.pack(pady=(10, 20))
        
-       self.rectangle_radio = tk.Radiobutton(self.shape_frame, text="Rectangle", variable=self.shape_var, value="rectangle", command=self.update_form, font=("Helvetica", 18), bg="#FFA500", selectcolor="#A23400", indicatoron=0, width=10,)
-       self.square_radio = tk.Radiobutton(self.shape_frame, text="Square", variable=self.shape_var, value="square", command=self.update_form, font=("Helvetica", 18), bg="#FFA500", selectcolor="#A23400", indicatoron=0, width=10,)
-       self.triangle_radio = tk.Radiobutton(self.shape_frame, text="Triangle", variable=self.shape_var, value="triangle", command=self.update_form, font=("Helvetica", 18), bg="#FFA500", selectcolor="#A23400", indicatoron=0, width=10)
+       self.rectangle_radio = tk.Radiobutton(self.shape_frame, text="Rectangle", variable=self.shape_var, value="rectangle", command=self.update_form, font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E", selectcolor="#FFA500", indicatoron=0, width=10)
+       self.square_radio = tk.Radiobutton(self.shape_frame, text="Square", variable=self.shape_var, value="square", command=self.update_form, font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E", selectcolor="#FFA500", indicatoron=0, width=10)
+       self.triangle_radio = tk.Radiobutton(self.shape_frame, text="Triangle", variable=self.shape_var, value="triangle", command=self.update_form, font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E", selectcolor="#FFA500", indicatoron=0, width=10)
        
        self.rectangle_radio.grid(row=0, column=0, padx=10, pady=5)
        self.square_radio.grid(row=1, column=0, padx=10, pady=5)
@@ -32,32 +32,43 @@ class Page4:
        # Input fields
        self.form_frame = tk.Frame(self.root, bg="#FFE2CF")
        self.form_frame.pack(pady=20)
-      
-       self.length_label = tk.Label(self.form_frame, text="Length:", font=("Helvetica", 18), bg="#FFE2CF", fg="#FFA500")
-       self.length_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#FFDA95")
-      
-       self.width_label = tk.Label(self.form_frame, text="Width:", font=("Helvetica", 18), bg="#FFE2CF", fg="#FFA500")
-       self.width_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#FFDA95")
-      
-       self.side_label = tk.Label(self.form_frame, text="Side Length:", font=("Helvetica", 18), bg="#FFE2CF", fg="#FFA500")
-       self.side_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#FFDA95")
-      
-       self.base_label = tk.Label(self.form_frame, text="Base:", font=("Helvetica", 18), bg="#FFE2CF", fg="#FFA500")
-       self.base_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#FFDA95")
-      
-       self.height_label = tk.Label(self.form_frame, text="Height:", font=("Helvetica", 18), bg="#FFE2CF", fg="#FFA500")
-       self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#FFDA95")
        
-       self.calculate_button = tk.Button(self.root, text="Calculate Area", command=self.calculate_area, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFE2CF", width=15, bd=0, highlightthickness=0)
+       self.length_label = tk.Label(self.form_frame, text="Enter Length:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.length_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
+      
+       self.width_label = tk.Label(self.form_frame, text="Enter Width:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.width_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
+      
+       self.side_label = tk.Label(self.form_frame, text="Enter Side Length:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.side_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
+      
+       self.base_label = tk.Label(self.form_frame, text="Enter Base:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.base_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
+      
+       self.height_label = tk.Label(self.form_frame, text="EnterHeight:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
+       
+       self.length_label.grid(row=0, column=0, pady=5, padx=5)
+       self.length_entry.grid(row=0, column=1, pady=5, padx=5)
+       self.width_label.grid(row=1, column=0, pady=5, padx=5)
+       self.width_entry.grid(row=1, column=1, pady=5, padx=5)
+       self.side_label.grid(row=0, column=0, pady=5, padx=5)
+       self.side_entry.grid(row=0, column=1, pady=5, padx=5)
+       self.base_label.grid(row=0, column=0, pady=5, padx=5)
+       self.base_entry.grid(row=0, column=1, pady=5, padx=5)
+       self.height_label.grid(row=1, column=0, pady=5, padx=5)
+       self.height_entry.grid(row=1, column=1, pady=5, padx=5)
+       
+       self.calculate_button = tk.Button(self.root, text="Enter", command=self.calculate_area, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#D2691E", activeforeground="#FFFFFF", width=15, bd=0, highlightthickness=0)
        self.calculate_button.pack(pady=20)
       
-       self.result_label = tk.Label(self.root, text="", font=("Helvetica", 22), bg="#FFE2CF")
+       self.result_label = tk.Label(self.root, text="The area is: ", font=("Helvetica", 22), bg="#FFE2CF", fg="#D2691E")
        self.result_label.pack(pady=20)
        
-       self.home_button = tk.Button(self.root, text="Home Page", font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FF8C00", activeforeground="#FFA500", width=10, bd=0, highlightthickness=0)
+       self.home_button = tk.Button(self.root, text="Home Page", font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0)
        self.home_button.pack(side=tk.LEFT, padx=50, pady=10)
        
-       self.clear_button = tk.Button(self.root, text="Clear", command=self.clear_fields, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FF8C00", activeforeground="#FFA500", width=10, bd=0, highlightthickness=0)
+       self.clear_button = tk.Button(self.root, text="Clear", command=self.clear_fields, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0)
        self.clear_button.pack(side=tk.RIGHT, padx=50, pady=10)
 
        # Initialize the form with the default shape

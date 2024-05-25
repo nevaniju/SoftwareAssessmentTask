@@ -6,17 +6,18 @@ class Page3:
         # Initialize the main application window
         self.root = root
         self.root.title("Quiz!")
-        self.root.geometry("500x800")
+        self.root.geometry("500x700")
         self.root.configure(bg="#FFE2CF")
+        self.root.resizable(False, False)
 
         # Create a border frame
-        border_frame = tk.Frame(self.root, bg="#D2691E", bd=10)
-        border_frame.place(relx=0.5, rely=0.5, anchor="center", width=480, height=780)
+        border_frame = tk.Frame(self.root, bg="#FFA500", bd=10)
+        border_frame.place(relx=0.5, rely=0.5, anchor="center", width=480, height=680)
         
         # Create an inner frame
         self.main_frame = tk.Frame(border_frame, bg="#FFE2CF")
         self.main_frame.pack(fill="both", expand=True)
-
+        
         # Create the title label
         self.title_label = tk.Label(self.main_frame, text="Quiz", font=("Helvetica", 50, "bold"), fg="#D2691E", bg="#FFE2CF")
         self.title_label.pack(pady=(20, 10))
@@ -28,7 +29,7 @@ class Page3:
         # List of questions, each with text, options, and the correct answer index
         self.questions = [
             {"text": "What is the area of a rectangle with a length of 3 and a width of 4?", "options": ["12", "13", "14", "15"], "answer_index": 0},
-            {"text": "What is the area of a triangle with a length of 6 and a width of 9?", "options": ["45", "54", "27", "72"], "answer_index": 2},
+            {"text": "What is the area of a rectangle with a length of 5 and a width of 9?", "options": ["13", "27", "4", "54"], "answer_index": 1},
             {"text": "What is the area of a rectangle with a length of 6 and a width of 2?", "options": ["12", "13", "14", "15"], "answer_index": 0},
             {"text": "What is the area of a square with a length of 20?", "options": ["123", "40", "20", "400"], "answer_index": 3},
             {"text": "What is the area of a triangle with a length of 10 and a width of 10?", "options": ["12", "50", "14", "15"], "answer_index": 1},
@@ -59,7 +60,7 @@ class Page3:
 
                 # Use enumerate to get both index and option
                 for index, option in enumerate(question["options"]):
-                    option_button = tk.Radiobutton(options_frame, text=option, variable=self.option_var, value=index, bg="#FFA500", fg="#8B4513", font=("Helvetica", 16), anchor='w', width=20, indicatoron=0, padx=10, pady=10, selectcolor="#F67000")
+                    option_button = tk.Radiobutton(options_frame, text=option, variable=self.option_var, value=index, bg="#FFE2CF", fg="#8B4513", font=("Helvetica", 16), anchor='w', width=20, indicatoron=0, padx=10, pady=10, selectcolor="#F67000")
                     option_button.pack(anchor='center', pady=5)
 
                 submit_button = tk.Button(self.main_frame, text="Submit", command=self.check_answer, bg="#FF9A76", font=("Helvetica", 14, "bold"))
@@ -71,12 +72,11 @@ class Page3:
 
                 # Display image for question 7
                 if self.question_number == 6:
-                    img = Image.open("squarearea.png")  
-                    img = img.resize((200, 200), Image.ANTIALIAS)
-                    img = ImageTk.PhotoImage(img)
-                    img_label = tk.Label(self.main_frame, image=img, bg="#FFE2CF")
-                    img_label.image = img 
-                    img_label.pack(pady=20)
+                    img = self.load_image("squarearea.png", (200, 200))
+                    if img:
+                        img_label = tk.Label(self.main_frame, image=img, bg="#FFE2CF")
+                        img_label.image = img 
+                        img_label.pack(pady=20)
 
                 submit_button = tk.Button(self.main_frame, text="Submit", command=self.check_answer, bg="#FF9A76", font=("Helvetica", 14, "bold"))
                 submit_button.pack(pady=20)
@@ -129,6 +129,9 @@ class Page3:
             next_button = tk.Button(self.main_frame, text="View Your Results", command=self.show_results, bg="#FF9A76", font=("Helvetica", 14, "bold"))
         next_button.pack(pady=20)
 
+        # Add bottom images
+        self.add_bottom_images()
+
     def next_question(self):
         # Move to the next question
         self.question_number += 1
@@ -146,18 +149,40 @@ class Page3:
         restart_button = tk.Button(self.main_frame, text="Restart Quiz", command=self.restart_quiz, bg="#FF9A76", font=("Helvetica", 14, "bold"))
         restart_button.pack(pady=20)
 
+        # Add bottom images
+        self.add_bottom_images()
+
     def restart_quiz(self):
         # Reset the quiz score and question number
         self.quiz_score = 0
         self.question_number = 0
         self.display_question()
 
+    def add_bottom_images(self):
+        # Add images at the bottom of the page
+        images_frame = tk.Frame(self.main_frame, bg="#FFE2CF")
+        images_frame.pack(side="bottom", pady=20)
+        
+        # Load and display images
+        img_paths = ["circle.png", "square.png", "triangle.png"]  
+        for img_path in img_paths:
+            img = self.load_image(img_path, (50, 50))
+            if img:
+                img_label = tk.Label(images_frame, image=img, bg="#FFE2CF")
+                img_label.image = img 
+                img_label.pack(side="left", padx=10)
+
+    def load_image(self, path, size):
+        try:
+            img = Image.open(path)
+            img = img.resize(size, Image.ANTIALIAS)
+            return ImageTk.PhotoImage(img)
+        except Exception as e:
+            print(f"Error loading image {path}: {e}")
+            return None
+
 if __name__ == "__main__":
     # Initialize the Tkinter root window
     root = tk.Tk()
-    
-    # Create an instance of the QuizApp
     app = Page3(root)
-    
-    # Run the Tkinter event loop
     root.mainloop()
