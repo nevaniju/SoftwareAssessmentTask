@@ -33,7 +33,7 @@ class Page1:
 
         image_file = "multipleshapes.png" 
         image = Image.open(image_file)
-        image = image.resize((400, 250))
+        image = image.resize((375, 250))
         photo = ImageTk.PhotoImage(image)
         image_label = tk.Label(border_frame, image=photo, bg="#FFE2CF")
         image_label.image = photo

@@ -1,4 +1,5 @@
 import tkinter as tk
+import HomePage
 
 class Page4:
    def __init__(self):
@@ -48,6 +49,14 @@ class Page4:
        self.height_label = tk.Label(self.form_frame, text="EnterHeight:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
        self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
        
+       #Dropdown box with options for units
+       self.unit_var = tk.StringVar(value="units")
+       self.unit_label = tk.Label(self.root, text="Select Unit:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.unit_label.pack(pady=(0, 5))
+       self.unit_dropdown = tk.OptionMenu(self.root, self.unit_var, "metres", "kilometres", "centimetres", "millimetres")
+       self.unit_dropdown.config(font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.unit_dropdown.pack(pady=(0, 20))
+ 
        self.length_label.grid(row=0, column=0, pady=5, padx=5)
        self.length_entry.grid(row=0, column=1, pady=5, padx=5)
        self.width_label.grid(row=1, column=0, pady=5, padx=5)
@@ -65,7 +74,7 @@ class Page4:
        self.result_label = tk.Label(self.root, text="The area is: ", font=("Helvetica", 22), bg="#FFE2CF", fg="#D2691E")
        self.result_label.pack(pady=20)
        
-       self.home_button = tk.Button(self.root, text="Home Page", font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0)
+       self.home_button = tk.Button(self.root, text="Home Page", font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0, command=self.navigate_to_homepage)
        self.home_button.pack(side=tk.LEFT, padx=50, pady=10)
        
        self.clear_button = tk.Button(self.root, text="Clear", command=self.clear_fields, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0)
@@ -97,22 +106,29 @@ class Page4:
            self.height_entry.grid(row=1, column=1, pady=5, padx=5)
       
    def calculate_area(self):
+       unit = self.unit_var.get()
        shape = self.shape_var.get()
        try:
            if shape == "rectangle":
                length = float(self.length_entry.get())
                width = float(self.width_entry.get())
+               if length < 0 or width < 0:
+                    raise ValueError("Negative values are not allowed")
                area = length * width
-               self.result_label.config(text=f"Area of Rectangle: {area}")
+               self.result_label.config(text=f"Area of Rectangle: {area} {unit}²")
            elif shape == "square":
                side = float(self.side_entry.get())
+               if side < 0:
+                    raise ValueError("Negative values are not allowed")
                area = side ** 2
-               self.result_label.config(text=f"Area of Square: {area}")
+               self.result_label.config(text=f"Area of Square: {area} {unit}²")
            elif shape == "triangle":
                base = float(self.base_entry.get())
                height = float(self.height_entry.get())
+               if base < 0 or height < 0:
+                    raise ValueError("Negative values are not allowed")
                area = 0.5 * base * height
-               self.result_label.config(text=f"Area of Triangle: {area}")
+               self.result_label.config(text=f"Area of Triangle: {area} {unit}²")
        except ValueError:
            self.result_label.config(text="Please enter valid numbers")
       
@@ -120,10 +136,20 @@ class Page4:
        for entry in [self.length_entry, self.width_entry, self.side_entry, self.base_entry, self.height_entry]:
            entry.delete(0, tk.END)
        self.result_label.config(text="")
+       
+   def navigate_to_homepage(self):
+        # Close the current Learn Page
+        self.root.destroy()
+
+        # Recreate the Home Page
+        root = tk.Tk()
+        HomePage.Page1(root)
+        root.mainloop()
       
    def run(self):
        # start the Tkinter event loop
        self.root.mainloop()
+
 
 # To run the application
 if __name__ == "__main__":
