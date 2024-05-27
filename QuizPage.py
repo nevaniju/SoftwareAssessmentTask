@@ -1,5 +1,8 @@
 import tkinter as tk
+from tkinter import ttk
+import customtkinter as ctk
 import HomePage
+import time 
 
 class Page3:
     def __init__(self, root):
@@ -25,16 +28,17 @@ class Page3:
         # Initialize quiz score and question number
         self.quiz_score = 0
         self.question_number = 0
+        self.start_time = time.time()  # Record the start time
 
         # List of questions, each with text, options, and the correct answer index
         self.questions = [
             {"text": "What is the area of a rectangle with a length of 3 and a width of 4?", "options": ["12", "13", "14", "15"], "answer_index": 0},
-            {"text": "What is the area of a triangle with a length of 5 and a width of 9?", "options": ["13", "27", "4", "54"], "answer_index": 1},
+            {"text": "What is the area of a triangle with a length of 6 and a width of 9?", "options": ["13", "27", "4", "54"], "answer_index": 1},
             {"text": "What is the area of a rectangle with a length of 6 and a width of 2?", "options": ["12", "13", "14", "15"], "answer_index": 0},
             {"text": "What is the area of a square with a length of 20?", "options": ["123", "40", "20", "400"], "answer_index": 3},
             {"text": "What is the area of a triangle with a length of 10 and a width of 10?", "options": ["12", "50", "14", "15"], "answer_index": 1},
             {"text": "What is the area of a square with a length of 7?", "options": ["49", "94", "14", "0"], "answer_index": 0},
-            {"text": "Challenge Question: What is the area of a rectangle with a length of 7 and a width of 7?", "options": ["49", "56", "42", "35"], "answer_index": 0}
+            {"text": "What is the area of a rectangle with a length of 14 and a width of 7?", "options": ["49", "56", "42", "35"], "answer_index": 0}
         ]
         
         # Display the first question
@@ -49,7 +53,7 @@ class Page3:
             self.clear_window()
 
             # Display the question text
-            question_label = tk.Label(self.main_frame, text=f"{self.question_number + 1}. {question['text']}", wraplength=450, bg="#FFE2CF", font=("Arial", 16, "bold"), padx=20, pady=20)
+            question_label = tk.Label(self.main_frame, text=f"{self.question_number + 1}. {question['text']}", wraplength=450, bg="#FFE2CF",fg="#D2691E", font=("Arial", 16, "bold"), padx=20, pady=20)
             question_label.pack(pady=20)
             
             # Display options as radio buttons
@@ -58,13 +62,13 @@ class Page3:
             options_frame.pack(pady=20)
 
             for index, option in enumerate(question["options"]):
-                option_button = tk.Radiobutton(options_frame, text=option, variable=self.option_var, value=index, bg="#FFE2CF", fg="#8B4513", font=("Helvetica", 16), anchor='w', width=20, indicatoron=0, padx=10, pady=10, selectcolor="#F67000")
+                option_button = tk.Radiobutton(options_frame, text=option, variable=self.option_var, value=index, bg="#FFA500", fg="#7E3501", font=("Helvetica", 16), anchor='w', width=20, indicatoron=0, padx=10, pady=10, selectcolor="#F67000")
                 option_button.pack(anchor='center', pady=5)
 
-            self.error_label = tk.Label(self.main_frame, text="", fg="red", bg="#FFE2CF", font=("Helvetica", 12))
+            self.error_label = tk.Label(self.main_frame, text="", fg="#D2691E", bg="#FFE2CF", font=("Helvetica", 12))
             self.error_label.pack(pady=5)
 
-            submit_button = tk.Button(self.main_frame, text="Submit", command=self.check_answer, bg="#FF9A76", font=("Helvetica", 14, "bold"))
+            submit_button = ctk.CTkButton(self.main_frame, text="Submit", command=self.check_answer, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=100, height=25)
             submit_button.pack(pady=20)
         else:
             # If all questions have been answered, show the results
@@ -92,7 +96,7 @@ class Page3:
                 feedback = f"You are incorrect, the correct answer is {question['options'][correct_answer_index]}"
             
             # Display feedback message
-            feedback_label = tk.Label(self.main_frame, text=feedback, wraplength=450, bg="#FFE2CF", font=("Helvetica", 16, "bold"))
+            feedback_label = tk.Label(self.main_frame, text=feedback, wraplength=450, bg="#FFE2CF", font=("Helvetica", 16, "bold"), fg="#D2691E")
             feedback_label.pack(pady=20)
 
             # Destroy the submit button
@@ -102,9 +106,9 @@ class Page3:
 
             # Display the "Next Question" button or "View Your Results" button
             if self.question_number < len(self.questions) - 1:
-                next_button = tk.Button(self.main_frame, text="Next Question", command=self.next_question, bg="#FF9A76", font=("Helvetica", 14, "bold"))
+                next_button = ctk.CTkButton(self.main_frame, text="Next Question", command=self.next_question, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=100, height=25)
             else:
-                next_button = tk.Button(self.main_frame, text="View Your Results", command=self.show_results, bg="#FF9A76", font=("Helvetica", 14, "bold"))
+                next_button = ctk.CTkButton(self.main_frame, text="View Your Results", command=self.show_results, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=150, height=35)
             next_button.pack(pady=20)
 
     def next_question(self):
@@ -113,6 +117,10 @@ class Page3:
         self.display_question()
 
     def show_results(self):
+         # Record the end time and calculate the total time taken
+        end_time = time.time()
+        total_time = end_time - self.start_time
+        minutes, seconds = divmod(total_time, 60)
         # Clear the current window content
         self.clear_window()
 
@@ -123,28 +131,21 @@ class Page3:
         score_label = tk.Label(self.main_frame, text=f"Your Score Is {self.quiz_score}/{len(self.questions)} !", bg="#FFE2CF", font=("Helvetica", 24))
         score_label.pack(pady=10)
 
+        time_label = tk.Label(self.main_frame, text=f"Time Taken: {int(minutes)} minutes and {int(seconds)} seconds", bg="#FFE2CF", font=("Helvetica", 18))
+        time_label.pack(pady=10)
+
         # Add buttons to restart quiz, go to home page, and quit
         button_frame = tk.Frame(self.main_frame, bg="#FFE2CF")
         button_frame.pack(pady=20)
 
-        restart_button = tk.Button(button_frame, text="Restart Quiz", command=self.restart_quiz, bg="#FFA500", font=("Helvetica", 14), width=15)
-        restart_button.grid(row=0, column=0, padx=10, pady=10)
+        restart_button = ctk.CTkButton(button_frame, text="Restart Quiz", command=self.restart_quiz, font=("Helvetica", 24), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=200, height=50)
+        restart_button.pack(pady=10)
 
-        home_button = tk.Button(button_frame, text="Home Page", command=self.navigate_to_homepage, bg="#FFA500", font=("Helvetica", 14), width=15)
-        home_button.grid(row=0, column=1, padx=10, pady=10)
+        home_button = ctk.CTkButton(button_frame, text="Home Page", command=self.navigate_to_homepage, font=("Helvetica", 24), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=200, height=50)
+        home_button.pack(pady=10)
 
-        quit_button = tk.Button(button_frame, text="Quit", command=self.root.quit, bg="#FFA500", font=("Helvetica", 14), width=15)
-        quit_button.grid(row=0, column=2, padx=10, pady=10)
-
-        # Add shapes at the bottom (images replaced with labels for simplicity)
-        shapes_frame = tk.Frame(self.main_frame, bg="#FFE2CF")
-        shapes_frame.pack(pady=20)
-
-        shapes = ["Circle", "Triangle", "Square", "Pentagon"]
-        colors = ["#FFA500", "#32CD32", "#1E90FF", "#FF69B4"]
-        for shape, color in zip(shapes, colors):
-            shape_label = tk.Label(shapes_frame, text=shape, bg=color, fg="white", font=("Helvetica", 14), width=10, height=3)
-            shape_label.pack(side="left", padx=10)
+        quit_button = ctk.CTkButton(button_frame, text="Quit", command=self.root.quit, font=("Helvetica", 24), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=200, height=50)
+        quit_button.pack(pady=10)
 
     def restart_quiz(self):
         # Reset the quiz score and question number
