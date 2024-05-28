@@ -1,5 +1,6 @@
 import tkinter as tk
 import HomePage
+import customtkinter as ctk
 
 class Page4:
    def __init__(self):
@@ -7,7 +8,10 @@ class Page4:
        self.root = tk.Tk()
        self.root.title("Area Calculator")
        self.root.geometry("500x700")
-       self.root.configure(bg="#FFE2CF", highlightbackground="#FFA500", highlightthickness=10)
+       self.root.configure(bg="#FFB347")
+       
+       border_frame = tk.Frame(self.root, bg="#FFE2CF", bd=5)
+       border_frame.place(relx=0.5, rely=0.5, anchor="center", width=470, height=680)
 
       
        # Create a title label
@@ -68,16 +72,16 @@ class Page4:
        self.height_label.grid(row=1, column=0, pady=5, padx=5)
        self.height_entry.grid(row=1, column=1, pady=5, padx=5)
        
-       self.calculate_button = tk.Button(self.root, text="Enter", command=self.calculate_area, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#D2691E", activeforeground="#FFFFFF", width=15, bd=0, highlightthickness=0)
+       self.calculate_button = tk.Button(self.root, text="Calculate", command=self.calculate_area, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#D2691E", activeforeground="#FFFFFF", width=15, bd=0, highlightthickness=0)
        self.calculate_button.pack(pady=20)
       
        self.result_label = tk.Label(self.root, text="The area is: ", font=("Helvetica", 22), bg="#FFE2CF", fg="#D2691E")
        self.result_label.pack(pady=20)
        
-       self.home_button = tk.Button(self.root, text="Home Page", font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0, command=self.navigate_to_homepage)
+       self.home_button = ctk.CTkButton(self.root, text="Home Page", font=("Helvetica", 18), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=150, height=30, command=self.navigate_to_homepage)
        self.home_button.pack(side=tk.LEFT, padx=50, pady=10)
        
-       self.clear_button = tk.Button(self.root, text="Clear", command=self.clear_fields, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#FFA500", activeforeground="#FFFFFF", width=10, bd=0, highlightthickness=0)
+       self.clear_button = ctk.CTkButton(self.root, text="Clear", command=self.clear_fields, font=("Helvetica", 18), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=150, height=30)
        self.clear_button.pack(side=tk.RIGHT, padx=50, pady=10)
 
        # Initialize the form with the default shape

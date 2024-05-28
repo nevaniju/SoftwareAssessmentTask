@@ -1,5 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+from tkinter import ttk
+import customtkinter as ctk
 import HomePage
 import QuizPage
 
@@ -13,7 +15,7 @@ class Page2:
         self.root.resizable(False, False)
 
 
-        # Create a frame with an orange border
+        # Create a frame with a border
         border_frame = tk.Frame(self.root, bg="#FFE2CF", bd=5)
         border_frame.place(relx=0.5, rely=0.5, anchor="center", width=470, height=680)
 
@@ -21,8 +23,8 @@ class Page2:
         title_label = tk.Label(border_frame, text="Learn!", font=("Helvetica", 48, "bold"), fg="#D2691E", bg="#FFE2CF")
         title_label.place(relx=0.5, rely=0.05, anchor=tk.CENTER)
 
-        # Create a label for the rectangle section
-        rectangle_label = tk.Label(border_frame, text="To find the area of a rectangle, you\nmultiply the length of the rectangle by the width.", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", justify="left")
+        # Create a label for the rectangle section (\n means new line)
+        rectangle_label = tk.Label(border_frame, text="To find the area of a rectangle, you\nmultiply the length of the rectangle by\nthe width.", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", justify="left")
         rectangle_label.place(x=20, y=100)
 
         # Rectangle area formula
@@ -30,9 +32,9 @@ class Page2:
         rectangle_formula.place(x=20, y=160)
 
         # Create an image of a rectangle
-        rectangle_image_file = "rectanglearea.png"
+        rectangle_image_file = "learnrectangle.png"
         rectangle_image = Image.open(rectangle_image_file)
-        rectangle_image = rectangle_image.resize((150, 70))
+        rectangle_image = rectangle_image.resize((160, 80))
         rectangle_photo = ImageTk.PhotoImage(rectangle_image)
         rectangle_image_label = tk.Label(border_frame, image=rectangle_photo, bg="#FFE2CF")
         rectangle_image_label.image = rectangle_photo
@@ -47,7 +49,7 @@ class Page2:
         triangle_formula.place(x=20, y=320)
 
         # Create an image of a triangle
-        triangle_image_file = "trianglearea.png"
+        triangle_image_file = "learntriangle.png"
         triangle_image = Image.open(triangle_image_file)
         triangle_image = triangle_image.resize((150, 100))
         triangle_photo = ImageTk.PhotoImage(triangle_image)
@@ -64,7 +66,7 @@ class Page2:
         square_formula.place(x=20, y=460)
 
         # Create an image of a square
-        square_image_file = "squarearea.png"
+        square_image_file = "learnsquare.png"
         square_image = Image.open(square_image_file)
         square_image = square_image.resize((150, 140))
         square_photo = ImageTk.PhotoImage(square_image)
@@ -73,11 +75,12 @@ class Page2:
         square_image_label.place(x=300, y=420)
 
         # Add Home Page and Quiz buttons
-        home_button = tk.Button(border_frame, text="Home Page", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", relief="flat", command=self.navigate_to_homepage )
-        home_button.place(x=90, y=600, width=150, height=40)
+        home_button = ctk.CTkButton(border_frame, text="Home Page", command=self.navigate_to_homepage, font=("Helvetica", 18), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=150, height=30)
+        home_button.place(x=90, y=600)
 
-        quiz_button = tk.Button(border_frame, text="Quiz", font=("Helvetica", 16), bg="#FFE2CF", fg="#D2691E", relief="flat", command=self.navigate_to_quizpage)
-        quiz_button.place(x=260, y=600, width=150, height=40)
+        quiz_button = ctk.CTkButton(border_frame, text="Quiz", command=self.navigate_to_quizpage, font=("Helvetica", 18), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=150, height=30)
+        quiz_button.place(x=260, y=600)
+        
 
         # Start the tkinter event loop
         self.root.mainloop()

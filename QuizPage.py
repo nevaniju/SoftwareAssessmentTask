@@ -22,7 +22,7 @@ class Page3:
         self.main_frame.pack(fill="both", expand=True)
         
         # Create the title label
-        self.title_label = tk.Label(self.main_frame, text="Quiz", font=("Helvetica", 50, "bold"), fg="#D2691E", bg="#FFE2CF")
+        self.title_label = tk.Label(self.main_frame, text="Quiz!", font=("Helvetica", 50, "bold"), fg="#D2691E", bg="#FFE2CF")
         self.title_label.pack(pady=(20, 10))
 
         # Initialize quiz score and question number
@@ -32,13 +32,19 @@ class Page3:
 
         # List of questions, each with text, options, and the correct answer index
         self.questions = [
-            {"text": "What is the area of a rectangle with a length of 3 and a width of 4?", "options": ["12", "13", "14", "15"], "answer_index": 0},
-            {"text": "What is the area of a triangle with a length of 6 and a width of 9?", "options": ["13", "27", "4", "54"], "answer_index": 1},
-            {"text": "What is the area of a rectangle with a length of 6 and a width of 2?", "options": ["12", "13", "14", "15"], "answer_index": 0},
-            {"text": "What is the area of a square with a length of 20?", "options": ["123", "40", "20", "400"], "answer_index": 3},
-            {"text": "What is the area of a triangle with a length of 10 and a width of 10?", "options": ["12", "50", "14", "15"], "answer_index": 1},
-            {"text": "What is the area of a square with a length of 7?", "options": ["49", "94", "14", "0"], "answer_index": 0},
-            {"text": "What is the area of a rectangle with a length of 14 and a width of 7?", "options": ["49", "56", "42", "35"], "answer_index": 0}
+            {"text": "What is the area of a square with a side length of 5?", "options": ["25", "13", "14", "15"], "answer_index": 0},
+            {"text": "A square has a side length of 8. What is its area?", "options": ["13", "64", "4", "54"], "answer_index": 1},
+            {"text": "Calculate the area of a square with a side length of 10.", "options": ["100", "13", "14", "15"], "answer_index": 0},
+            {"text": "If a square has a side length of 12, what is its area?", "options": ["123", "40", "20", "144"], "answer_index": 3},
+            {"text": "A rectangle has a length of 7 and a width of 3. What is its area?", "options": ["12", "21", "14", "15"], "answer_index": 1},
+            {"text": "What is the area of a rectangle with a length of 15 and a width of 4?", "options": ["60", "94", "14", "0"], "answer_index": 0},
+            {"text": "Find the area of a rectangle with a length of 9 and a width of 6.", "options": ["49", "56", "54", "35"], "answer_index": 2},
+            {"text": "A rectangle has a length of 20 and a width of 5. What is its area?", "options": ["49", "56", "100", "35"], "answer_index": 2},
+            {"text": "A triangle has a base of 10 and a height of 5. What is its area?", "options": ["49", "56", "25", "35"], "answer_index": 2},
+            {"text": "What is the area of a triangle with a base of 8 and a height of 4?", "options": ["16", "56", "98", "35"], "answer_index": 0},
+            {"text": "Calculate the area of a triangle with a base of 12 and a height of 7.", "options": ["49", "42", "98", "35"], "answer_index": 1},
+            {"text": " If a triangle has a base of 14 and a height of 6, what is its area?", "options": ["49", "56", "98", "42"], "answer_index": 3},
+
         ]
         
         # Display the first question
@@ -128,10 +134,10 @@ class Page3:
         results_label = tk.Label(self.main_frame, text="Well Done!", bg="#FFE2CF", font=("Helvetica", 50, "bold"), fg="#D2691E")
         results_label.pack(pady=(20, 10))
 
-        score_label = tk.Label(self.main_frame, text=f"Your Score Is {self.quiz_score}/{len(self.questions)} !", bg="#FFE2CF", font=("Helvetica", 24))
+        score_label = tk.Label(self.main_frame, text=f"Your Score Is {self.quiz_score}/{len(self.questions)} !", bg="#FFE2CF", font=("Helvetica", 24), fg="#D2691E")
         score_label.pack(pady=10)
 
-        time_label = tk.Label(self.main_frame, text=f"Time Taken: {int(minutes)} minutes and {int(seconds)} seconds", bg="#FFE2CF", font=("Helvetica", 18))
+        time_label = tk.Label(self.main_frame, text=f"Time Taken: {int(minutes)} minutes and {int(seconds)} seconds", bg="#FFE2CF", font=("Helvetica", 18), fg="#D2691E")
         time_label.pack(pady=10)
 
         # Add buttons to restart quiz, go to home page, and quit
