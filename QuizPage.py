@@ -3,6 +3,7 @@ from tkinter import ttk
 import customtkinter as ctk
 import HomePage
 import time 
+import random 
 
 class Page3:
     def __init__(self, root):
@@ -40,13 +41,47 @@ class Page3:
             {"text": "What is the area of a rectangle with a length of 15 and a width of 4?", "options": ["60", "94", "14", "0"], "answer_index": 0},
             {"text": "Find the area of a rectangle with a length of 9 and a width of 6.", "options": ["49", "56", "54", "35"], "answer_index": 2},
             {"text": "A rectangle has a length of 20 and a width of 5. What is its area?", "options": ["49", "56", "100", "35"], "answer_index": 2},
-            {"text": "A triangle has a base of 10 and a height of 5. What is its area?", "options": ["49", "56", "25", "35"], "answer_index": 2},
-            {"text": "What is the area of a triangle with a base of 8 and a height of 4?", "options": ["16", "56", "98", "35"], "answer_index": 0},
-            {"text": "Calculate the area of a triangle with a base of 12 and a height of 7.", "options": ["49", "42", "98", "35"], "answer_index": 1},
-            {"text": " If a triangle has a base of 14 and a height of 6, what is its area?", "options": ["49", "56", "98", "42"], "answer_index": 3},
+            {"text": "A triangle has a base of 10 and a height of 5. What is its area?", "options": ["49", "56", "25", "105"], "answer_index": 2},
+            {"text": "What is the area of a triangle with a base of 8 and a height of 4?", "options": ["16", "56", "8", "875"], "answer_index": 0},
+            {"text": "Calculate the area of a triangle with a base of 12 and a height of 7.", "options": ["49", "42", "98", "455"], "answer_index": 1},
+            {"text": "If a triangle has a base of 14 and a height of 6, what is its area?", "options": ["49", "56", "68", "42"], "answer_index": 3},
+            {"text": "A square has a side length of 11. What is its area?", "options": ["121", "11", "22", "111"], "answer_index": 0},
+            {"text": "Calculate the area of a square with a side length of 6.", "options": ["36", "18", "24", "12"], "answer_index": 0},
+            {"text": "If a square has a side length of 9, what is its area?", "options": ["18", "90", "81", "63"], "answer_index": 2},
+            {"text": "What is the area of a square with a side length of 14?", "options": ["196", "28", "112", "140"], "answer_index": 0},
+            {"text": "Find the area of a rectangle with a length of 12 and a width of 7.", "options": ["84", "21", "60", "49"], "answer_index": 0},
+            {"text": "A rectangle has a length of 10 and a width of 8. What is its area?", "options": ["65.5", "18", "80", "72"], "answer_index": 2},
+            {"text": "What is the area of a rectangle with a length of 5 and a width of 9?", "options": ["45", "14", "40", "35"], "answer_index": 0},
+            {"text": "Calculate the area of a rectangle with a length of 16 and a width of 3.", "options": ["48", "30", "18", "60"], "answer_index": 0},
+            {"text": "A rectangle has a length of 14 and a width of 4. What is its area?", "options": ["65", "36", "56", "64"], "answer_index": 2},
+            {"text": "What is the area of a triangle with a base of 15 and a height of 6?", "options": ["45", "30", "90", "75"], "answer_index": 0},
+            {"text": "Calculate the area of a triangle with a base of 9 and a height of 4.", "options": ["18", "36", "45", "27"], "answer_index": 0},
+            {"text": "A triangle has a base of 11 and a height of 8. What is its area?", "options": ["88", "44", "98", "56"], "answer_index": 1},
+            {"text": "If a triangle has a base of 7 and a height of 3, what is its area?", "options": ["10.5", "21", "14", "24.5"], "answer_index": 0},
+            {"text": "What is the area of a triangle with a base of 13 and a height of 5?", "options": ["32.5", "25", "37.5", "30"], "answer_index": 2},
+            {"text": "A rectangle has a length of 18 and a width of 5. What is its area?", "options": ["90", "72", "45", "82"], "answer_index": 0},
+            {"text": "Calculate the area of a square with a side length of 3.", "options": ["9", "6", "12", "15"], "answer_index": 0},
+            {"text": "What is the area of a triangle with a base of 20 and a height of 10?", "options": ["10", "200", "50", "100"], "answer_index": 3},
+            {"text": "A rectangle has a length of 8 and a width of 11. What is its area?", "options": ["19", "18", "88", "66"], "answer_index": 2},
+            {"text": "If a square has a side length of 17, what is its area?", "options": ["298", "170", "289", "34"], "answer_index": 2},
+            {"text": "A square has a side length of 15. What is its area?", "options": ["225", "30", "45", "115"], "answer_index": 0},
+            {"text": "Find the area of a rectangle with a length of 13 and a width of 6.", "options": ["78", "60", "72", "65"], "answer_index": 0},
+            {"text": "A rectangle has a length of 11 and a width of 9. What is its area?", "options": ["99", "90", "88", "79"], "answer_index": 0},
+            {"text": "Calculate the area of a square with a side length of 4.", "options": ["16", "8", "12", "10"], "answer_index": 0},
+            {"text": "If a square has a side length of 18, what is its area?", "options": ["324", "36", "180", "162"], "answer_index": 0},
+            {"text": "What is the area of a triangle with a base of 6 and a height of 3?", "options": ["18", "9", "12", "6"], "answer_index": 1},
+            {"text": "A triangle has a base of 5 and a height of 7. What is its area?", "options": ["17.5", "12", "35", "10.5"], "answer_index": 0},
+            {"text": "Calculate the area of a rectangle with a length of 7 and a width of 4.", "options": ["14", "21", "24", "28"], "answer_index": 3},
+            {"text": "If a triangle has a base of 8 and a height of 6, what is its area?", "options": ["24", "14", "16", "48"], "answer_index": 0},
+            {"text": "What is the area of a square with a side length of 7?", "options": ["49", "14", "21", "28"], "answer_index": 0},
+            {"text": "A rectangle has a length of 6 and a width of 9. What is its area?", "options": ["54", "36", "45", "63"], "answer_index": 0},
+            {"text": "Find the area of a triangle with a base of 4 and a height of 3.", "options": ["5.5", "6", "4.5", "12"], "answer_index": 1}
+        ]   
 
-        ]
+ # Randomly select 10 questions from the list
+        self.questions = random.sample(self.questions, 10)
         
+        self.user_answers = []
         # Display the first question
         self.display_question()
 

@@ -25,7 +25,7 @@ class Page1:
         button2 = ctk.CTkButton(border_frame, text="Learn!", command=self.navigate_to_learnpage,  font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=200, height=50)
         button2.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
 
-        button3 = ctk.CTkButton(border_frame, text="Quiz!", command=self.navigate_to_quizpage, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=200, height=50)
+        button3 = ctk.CTkButton(border_frame, text="Begin Quiz!", command=self.navigate_to_quizpage, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=200, height=50)
         button3.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
 
         button4 = ctk.CTkButton(border_frame, text="Area Calculator", command=self.navigate_to_areacalculatorpage, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=200, height=50)

@@ -9,6 +9,7 @@ class Page4:
        self.root.title("Area Calculator")
        self.root.geometry("500x700")
        self.root.configure(bg="#FFB347")
+       self.root.resizable(False, False)
        
        border_frame = tk.Frame(self.root, bg="#FFE2CF", bd=5)
        border_frame.place(relx=0.5, rely=0.5, anchor="center", width=470, height=680)
@@ -50,7 +51,7 @@ class Page4:
        self.base_label = tk.Label(self.form_frame, text="Enter Base:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
        self.base_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
       
-       self.height_label = tk.Label(self.form_frame, text="EnterHeight:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
+       self.height_label = tk.Label(self.form_frame, text="Enter Height:", font=("Helvetica", 18), bg="#FFE2CF", fg="#D2691E")
        self.height_entry = tk.Entry(self.form_frame, font=("Helvetica", 18), width=10, fg="#D2691E", bg="#FFE2CF", justify="center")
        
        #Dropdown box with options for units
