@@ -2,6 +2,7 @@ import tkinter as tk
 import HomePage
 import customtkinter as ctk
 
+#set the basic GUI
 class Page4:
    def __init__(self):
        # create a new root window for page 4
@@ -22,7 +23,7 @@ class Page4:
        subheading_label = tk.Label(self.root, text="Please select your shape:", font=("Helvetica", 20), fg="#D2691E", bg="#FFE2CF")
        subheading_label.pack(pady=(0, 20))
       
-       # Shape selection
+       # Shape selection buttons
        self.shape_var = tk.StringVar(value="none")
        self.shape_frame = tk.Frame(self.root, bg="#FFE2CF")
        self.shape_frame.pack(pady=(10, 20))
@@ -73,12 +74,14 @@ class Page4:
        self.height_label.grid(row=1, column=0, pady=5, padx=5)
        self.height_entry.grid(row=1, column=1, pady=5, padx=5)
        
+#labels for instructions and text on the page
        self.calculate_button = tk.Button(self.root, text="Calculate", command=self.calculate_area, font=("Helvetica", 18, "bold"), bg="#FFE2CF", fg="#FFA500", activebackground="#D2691E", activeforeground="#FFFFFF", width=15, bd=0, highlightthickness=0)
        self.calculate_button.pack(pady=20)
       
        self.result_label = tk.Label(self.root, text="The area is: ", font=("Helvetica", 22), bg="#FFE2CF", fg="#D2691E")
        self.result_label.pack(pady=20)
-       
+    
+#home page and clear buttons
        self.home_button = ctk.CTkButton(self.root, text="Home Page", font=("Helvetica", 18), fg_color="#D2691E", text_color="black", hover_color="#FFB347", width=150, height=30, command=self.navigate_to_homepage)
        self.home_button.pack(side=tk.LEFT, padx=50, pady=10)
        
@@ -109,7 +112,8 @@ class Page4:
            self.base_entry.grid(row=0, column=1, pady=5, padx=5)
            self.height_label.grid(row=1, column=0, pady=5, padx=5)
            self.height_entry.grid(row=1, column=1, pady=5, padx=5)
-      
+
+#functions to calculate the area using the formula for the respective shapes
    def calculate_area(self):
        unit = self.unit_var.get()
        shape = self.shape_var.get()
@@ -136,12 +140,14 @@ class Page4:
                self.result_label.config(text=f"Area of Triangle: {area} {unit}²")
        except ValueError:
            self.result_label.config(text="Please enter valid numbers")
-      
+
+#function to clear the entry fields on the command of the button      
    def clear_fields(self):
        for entry in [self.length_entry, self.width_entry, self.side_entry, self.base_entry, self.height_entry]:
            entry.delete(0, tk.END)
        self.result_label.config(text="")
-       
+
+#function for buttons     
    def navigate_to_homepage(self):
         # Close the current Learn Page
         self.root.destroy()

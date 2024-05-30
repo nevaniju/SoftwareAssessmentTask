@@ -1,10 +1,10 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-from tkinter import ttk
 import customtkinter as ctk
 import HomePage
 import QuizPage
 
+#set the basic GUI
 class Page2:
     def __init__(self):
         # Create a new root window for page 2

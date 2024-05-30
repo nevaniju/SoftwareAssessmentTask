@@ -1,11 +1,11 @@
 import tkinter as tk
-from tkinter import ttk
 import customtkinter as ctk
 from PIL import Image, ImageTk
 import LearnPage
 import QuizPage
 import AreaCalculatorPage
 
+#set the basic GUI
 class Page1:
     def __init__(self, root):
         self.root = root
@@ -15,6 +15,7 @@ class Page1:
         self.root.resizable(False, False)
         self.create_widgets()
 
+#create the title and the buttons
     def create_widgets(self):
         border_frame = tk.Frame(self.root, bg="#FFE2CF", bd=10)
         border_frame.place(relx=0.5, rely=0.5, anchor="center", width=480, height=680)
@@ -31,6 +32,7 @@ class Page1:
         button4 = ctk.CTkButton(border_frame, text="Area Calculator", command=self.navigate_to_areacalculatorpage, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=200, height=50)
         button4.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
 
+#image upload for home page
         image_file = "multipleshapes.png" 
         image = Image.open(image_file)
         image = image.resize((375, 250))
@@ -46,6 +48,7 @@ class Page1:
         border_frame.rowconfigure(2, weight=1)
         border_frame.rowconfigure(3, weight=1)
 
+#functions for each of the buttons
     def navigate_to_learnpage(self):
         # destroy the current page
         self.root.destroy()

@@ -1,10 +1,10 @@
 import tkinter as tk
-from tkinter import ttk
 import customtkinter as ctk
 import HomePage
 import time 
 import random 
 
+#set the basic GUI
 class Page3:
     def __init__(self, root):
         # Initialize the main application window
@@ -152,8 +152,8 @@ class Page3:
                 next_button = ctk.CTkButton(self.main_frame, text="View Your Results", command=self.show_results, font=("Helvetica", 24), fg_color="#FFA500", text_color="black", hover_color="#FFB347", width=150, height=35)
             next_button.pack(pady=20)
 
+# Function to move to the next question
     def next_question(self):
-        # Move to the next question
         self.question_number += 1
         self.display_question()
 
@@ -174,6 +174,7 @@ class Page3:
 
         time_label = tk.Label(self.main_frame, text=f"Time Taken: {int(minutes)} minutes and {int(seconds)} seconds", bg="#FFE2CF", font=("Helvetica", 18), fg="#D2691E")
         time_label.pack(pady=10)
+
 
         # Add buttons to restart quiz, go to home page, and quit
         button_frame = tk.Frame(self.main_frame, bg="#FFE2CF")
